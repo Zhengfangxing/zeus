@@ -1,0 +1,5 @@
+# application.yml
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
