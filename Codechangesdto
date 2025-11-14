@@ -1,0 +1,20 @@
+public List<EnhancedChangeDTO> enrichChanges(
+        List<ChangeDTO> changes,
+        Map<String, String> originFiles) {
+
+    return changes.stream()
+        .map(change -> {
+            EnhancedChangeDTO dto = new EnhancedChangeDTO();
+            dto.setFileName(change.getFileName());
+            dto.setFileContent(change.getFileContent());
+            dto.setNewFile(change.isNewFile());
+
+            // 如果不是新增文件，尝试获取原始内容
+            if (!change.isNewFile()) {
+                dto.setOriginFileContent(originFiles.get(change.getFileName()));
+            }
+
+            return dto;
+        })
+        .collect(Collectors.toList());
+}
