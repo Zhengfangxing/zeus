@@ -1,0 +1,35 @@
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import java.util.HashMap;
+import java.util.Map;
+
+// 包装HttpServletRequest以支持添加请求头
+public class CustomRequestWrapper extends HttpServletRequestWrapper {
+    private final Map<String, String> customHeaders = new HashMap<>();
+
+    public CustomRequestWrapper(HttpServletRequest request) {
+        super(request);
+    }
+
+    // 实现addHeader方法，存储自定义请求头
+    public void addHeader(String name, String value) {
+        customHeaders.put(name, value);
+    }
+
+    // 重写getHeader，优先获取自定义请求头
+    @Override
+    public String getHeader(String name) {
+        String customHeader = customHeaders.get(name);
+        return customHeader != null ? customHeader : super.getHeader(name);
+    }
+}
+@Override
+public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+    // 包装原始请求
+    CustomRequestWrapper requestWrapper = new CustomRequestWrapper(request);
+    // 注入Token到请求头
+    requestWrapper.addHeader("Authorization", "Bearer " + getToken());
+    // 替换请求对象
+    request = requestWrapper;
+    return true;
+}
