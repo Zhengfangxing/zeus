@@ -1,0 +1,69 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="system-arch" name="项目架构概览">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <!-- 分组：客户端层 -->
+        <mxCell id="2" value="&lt;b&gt;客户端层&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1976d2;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="50" y="50" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="3" value="前端应用" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bbdefb;strokeColor=#1976d2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="130" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <!-- 分组：网关层 -->
+        <mxCell id="4" value="&lt;b&gt;网关层（GCP）&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#388e3c;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="50" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="5" value="Kong Gateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#388e3c;" vertex="1" parent="1">
+          <mxGeometry x="210" y="130" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <!-- 分组：核心服务层（GCP） -->
+        <mxCell id="6" value="&lt;b&gt;核心服务层（GCP）&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57c00;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="200" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="7" value="Spring Boot 服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe0b2;strokeColor=#f57c00;" vertex="1" parent="1">
+          <mxGeometry x="380" y="130" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <!-- 依赖服务（GCP 内部） -->
+        <mxCell id="8" value="Cyber Flow（内部第三方）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c2185b;" vertex="1" parent="1">
+          <mxGeometry x="380" y="200" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="9" value="企业 GitHub 服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c2185b;" vertex="1" parent="1">
+          <mxGeometry x="380" y="270" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="10" value="GCP Secret Manager" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c2185b;" vertex="1" parent="1">
+          <mxGeometry x="550" y="200" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <!-- 数据库层 -->
+        <mxCell id="11" value="PostgreSQL（主库）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2f1;strokeColor=#00897b;" vertex="1" parent="1">
+          <mxGeometry x="210" y="200" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="12" value="Azure PostgreSQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2f1;strokeColor=#00897b;" vertex="1" parent="1">
+          <mxGeometry x="210" y="270" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <!-- LLM 服务层（GCP） -->
+        <mxCell id="13" value="Spring Boot LLM 服务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;" vertex="1" parent="1">
+          <mxGeometry x="550" y="130" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <!-- 下游服务层（Azure） -->
+        <mxCell id="14" value="&lt;b&gt;下游服务层（Azure）&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f1f8e9;strokeColor=#689f38;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="720" y="50" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="15" value="Kun Web Services" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcedc8;strokeColor=#689f38;" vertex="1" parent="1">
+          <mxGeometry x="730" y="130" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <!-- 连接线 -->
+        <mxCell id="16" value="" style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="3" target="5"/>
+        <mxCell id="17" value="路由转发" style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="5" target="7"/>
+        <mxCell id="18" value="数据读写" style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="7" target="11"/>
+        <mxCell id="19" value="调用" style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="7" target="8"/>
+        <mxCell id="20" value="调用" style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="7" target="9"/>
+        <mxCell id="21" value="获取密钥" style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="7" target="10"/>
+        <mxCell id="22" value="密钥认证访问" style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="10" target="12"/>
+        <mxCell id="23" value="调用" style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="7" target="13"/>
+        <mxCell id="24" value="调用" style="endArrow=block;html=1;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="13" target="15"/>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
